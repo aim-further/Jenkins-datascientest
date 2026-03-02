@@ -94,14 +94,16 @@ pipeline {
 
 
 
-    post {
-
+post {
         success {
-
-            echo 'Félicitations ! Le pipeline est entièrement vert.'
-
+            mail to: 'seynabou.dieng93@gmail.com',
+                 subject: "Succès du Pipeline : ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "Félicitations ! Le déploiement en production est terminé avec succès."
         }
-
+        failure {
+            mail to: 'seynabou.dieng93@gmail.com',
+                 subject: "ÉCHEC du Pipeline : ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "Attention, le pipeline a échoué. Veuillez vérifier les logs sur Jenkins."
+        }
     }
-
 }
